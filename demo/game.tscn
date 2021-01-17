@@ -1,0 +1,100 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://models/level/level.escn" type="PackedScene" id=1]
+[ext_resource path="res://space_sky.tga" type="Texture" id=2]
+[ext_resource path="res://models/ship/ship.escn" type="PackedScene" id=3]
+[ext_resource path="res://addons/ship_controller/ship_controller.tscn" type="PackedScene" id=4]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1000, 1, 1000 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 10.9673, 24.3491, 10.621 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 10.9673, 56.7528, 10.621 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 41.04, 43.6719, 22.8803 )
+
+[sub_resource type="CapsuleShape" id=5]
+radius = 1.28868
+height = 5.27215
+
+[sub_resource type="CapsuleShape" id=6]
+radius = 1.28868
+height = 5.27215
+
+[sub_resource type="PanoramaSky" id=7]
+panorama = ExtResource( 2 )
+
+[sub_resource type="Environment" id=8]
+background_mode = 2
+background_sky = SubResource( 7 )
+background_color = Color( 0.788235, 0.631373, 0.207843, 1 )
+
+[node name="Game" type="Spatial"]
+
+[node name="Level" parent="." instance=ExtResource( 1 )]
+
+[node name="StaticBody" type="StaticBody" parent="."]
+input_ray_pickable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 0.989037, 6.45492e-09, 0.147671, -6.45492e-09, 1, -4.7923e-10, -0.147671, -4.7923e-10, 0.989037, -144.531, -0.567209, -116.907 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape6" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 0.999571, 6.45492e-09, -0.0292824, -6.43812e-09, 1, 6.6804e-10, 0.0292824, -4.7923e-10, 0.999571, 127.784, -0.56721, 206.63 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape7" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 0.833722, 6.45492e-09, -0.552184, -5.11699e-09, 1, 3.96385e-09, 0.552184, -4.7923e-10, 0.833722, -11.9488, -0.567209, 200.267 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape8" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 0.999976, 6.45492e-09, 0.00691146, -6.45808e-09, 1, 4.34605e-10, -0.00691146, -4.7923e-10, 0.999976, 127.91, -23.7252, -107.142 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape9" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 0.855599, 6.45492e-09, -0.517639, -5.27476e-09, 1, 3.75135e-09, 0.517639, -4.7923e-10, 0.855599, 33.4151, -23.7252, -102.12 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 0.989037, 6.45492e-09, 0.147671, -6.45492e-09, 1, -4.7923e-10, -0.147671, -4.7923e-10, 0.989037, -61.0752, 23.0102, -129.368 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 0.999895, 6.45492e-09, 0.0144857, -6.46118e-09, 1, 3.85675e-10, -0.0144857, -4.7923e-10, 0.999895, 55.4068, 11.6114, -174.07 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape5" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 0.870613, 6.45492e-09, -0.491968, -5.38397e-09, 1, 3.59284e-09, 0.491968, -4.7923e-10, 0.870613, -117.041, 11.6114, 193.466 )
+shape = SubResource( 4 )
+
+[node name="PlayerShip" parent="." instance=ExtResource( 4 )]
+can_sleep = false
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerShip"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.569485, 0.281008 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="PlayerShip"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.720133, -1.61776 )
+shape = SubResource( 6 )
+
+[node name="ship" parent="PlayerShip" instance=ExtResource( 3 )]
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.589069, 0.345748, -0.73038, 0, 0.903844, 0.427863, 0.808082, -0.252041, 0.532427, 0.14779, 7.90522, 0.302313 )
+shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_normal_bias = 16.0
+directional_shadow_max_distance = 400.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 8 )
