@@ -12,9 +12,8 @@ The ship can be moved forward by increasing the acceleration with the mouse
 wheel. The player can strafe horizontaly with A and D and verticaly with shift
 and space. He can roll left and right with Q and E.
 
-The ship can be rotated by
-moving the mouse. Yaw (rotating left and right) is slower than pitching
-(rotating up and down) to make it feel more like an airplane.
+The ship can be rotated by moving the mouse. Yaw (rotating left and right) is
+slower than pitching (rotating up and down) to make it feel more like an airplane.
 
 Camera
 ======
@@ -131,3 +130,6 @@ func set_possessed(to : bool) -> void:
 	# capture / release the mouse
 	Input.set_mouse_mode(
 			Input.MOUSE_MODE_CAPTURED if possessed else Input.MOUSE_MODE_VISIBLE)
+	# make camera current
+	if possessed:
+		set_camera_mode(camera_mode)
