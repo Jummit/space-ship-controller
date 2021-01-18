@@ -53,8 +53,10 @@ export(CameraMode) var camera_mode := CameraMode.EXTERNAL setget set_camera_mode
 # The current speed the ships accelerates at. This is changed by the player.
 var acceleration := 0.0
 
+var possessed := false setget set_possessed
+
 func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	set_possessed(possessed)
 	# for the `SmoothFollower` to work it has to be in global space
 	$SmoothFollower.set_as_toplevel(true)
 
@@ -117,3 +119,11 @@ func set_camera_mode(to : int) -> void:
 		$CockpitCamera.make_current()
 	else:
 		$SmoothFollower/ExternalCamera.make_current()
+
+
+func set_possessed(to : bool) -> void:
+	possessed = to
+	set_process_unhandled_input(possessed)
+	set_process(possessed)
+	Input.set_mouse_mode(
+			Input.MOUSE_MODE_CAPTURED if possessed else Input.MOUSE_MODE_VISIBLE)
