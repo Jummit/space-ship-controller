@@ -6,6 +6,8 @@ A player controlled space ship
 Controls
 ========
 
+To make the player control the ship, set possessed to true.
+
 The ship can be moved forward by increasing the acceleration with the mouse
 wheel. The player can strafe horizontaly with A and D and verticaly with shift
 and space. He can roll left and right with Q and E.
@@ -46,14 +48,14 @@ export(float, 0.0, 200.0) var yaw_speed := 50
 # How sensitive changing the pitch with the mouse is.
 # This also defines the max pitch speed.
 export(float, 0.0, 200.0) var pitch_speed := 80
-
 # Which camera to choose. See `CameraMode`.
 export(CameraMode) var camera_mode := CameraMode.EXTERNAL setget set_camera_mode
+# If the ship is being controlled by the player. Setting this to true captures
+# the mouse and makes the ship camera the current camera.
+export var possessed := false setget set_possessed
 
 # The current speed the ships accelerates at. This is changed by the player.
 var acceleration := 0.0
-
-var possessed := false setget set_possessed
 
 func _ready() -> void:
 	set_possessed(possessed)
@@ -123,7 +125,9 @@ func set_camera_mode(to : int) -> void:
 
 func set_possessed(to : bool) -> void:
 	possessed = to
+	# enable / disable input
 	set_process_unhandled_input(possessed)
 	set_process(possessed)
+	# capture / release the mouse
 	Input.set_mouse_mode(
 			Input.MOUSE_MODE_CAPTURED if possessed else Input.MOUSE_MODE_VISIBLE)
