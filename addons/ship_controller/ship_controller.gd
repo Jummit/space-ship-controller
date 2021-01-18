@@ -93,8 +93,8 @@ func _unhandled_input(event : InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Input.is_action_pressed("free_camera"):
 			# rotate camera
-			get_viewport().get_camera().global_rotate(transform.basis.y, -event.relative.y / 1000.0)
-			get_viewport().get_camera().global_rotate(transform.basis.x, -event.relative.x / 1000.0)
+			get_viewport().get_camera().global_rotate(transform.basis.y, -event.relative.x / 1000.0)
+			get_viewport().get_camera().global_rotate(transform.basis.x, -event.relative.y / 1000.0)
 		else:
 			# rotate the spaceship
 			var pitch : float = -event.relative.y / 1000.0
