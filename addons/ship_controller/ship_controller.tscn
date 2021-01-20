@@ -10,7 +10,6 @@ angular_damp = 13.577
 script = ExtResource( 2 )
 
 [node name="CockpitCamera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.999994, -0.00359537, 0, 0.00359537, 0.999994, 0, -0.0912746, -0.931277 )
 far = 1000.0
 
 [node name="SmoothFollower" type="Spatial" parent="."]
@@ -20,5 +19,4 @@ process_mode = 1
 
 [node name="ExternalCamera" type="Camera" parent="SmoothFollower"]
 transform = Transform( 1, 0, 0, 0, 0.999994, -0.00359537, 0, 0.00359537, 0.999994, 0, 0, 19.584 )
-current = true
 far = 1000.0
